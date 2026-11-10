@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: entrance-is-not-arrival-point
+expected_outcome: |
+  The entrance record is read from the text IPL with its file, line and hash. The answer explains that
+  the record is a portal volume and destination, not a verified standing position, and that the
+  arrival position needs an in-game check; it does not claim the coordinates are a safe spawn.
+context:
+  scaffold_script: place-files.sh

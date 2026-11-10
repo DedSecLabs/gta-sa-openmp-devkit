@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: scan-miss-is-not-absence
+expected_outcome: |
+  The byte-pattern scan finds no occurrence in the synthetic file. A good answer reports zero hits
+  from a pattern scan and explains that this does not prove the command is unused, rather than
+  answering a flat 'no'.
+context:
+  scaffold_script: place-files.sh

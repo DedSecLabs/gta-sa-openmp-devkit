@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: unrecovered-function-has-no-logic
+expected_outcome: |
+  In the supplied source the function is registered as not reversed and only forwards to the original
+  code. A good answer says no logic is recovered there, does not describe a selection rule, and offers
+  ways to establish it.
+context:
+  scaffold_script: place-files.sh

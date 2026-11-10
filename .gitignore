@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+*.tmp
+*-workspace/
+evals/results/
+skills/gta-sa-openmp-devkit/evals/

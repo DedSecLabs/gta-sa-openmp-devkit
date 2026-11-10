@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: does-not-invent-native
+expected_outcome: |
+  SetPlayerRunSpeedMultiplier is not declared in the supplied includes. A good answer checks the
+  includes, says the native is not available there, does not write code that calls it as if it
+  existed, and labels the single-player claim about fat and speed as unverified.
+context:
+  scaffold_script: place-files.sh
