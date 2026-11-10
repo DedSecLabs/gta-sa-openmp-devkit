@@ -263,6 +263,24 @@ class PawnUncertainty(unittest.TestCase):
                                   "Impossible": "disabled", "Outside": "declared"})
 
 
+class PythonVersion(unittest.TestCase):
+    def test_versions_below_the_minimum_are_refused_with_one_line(self):
+        import contextlib
+        import io
+        from unittest import mock
+        import _common
+        self.assertTrue(_common.python_supported((3, 12, 0)))
+        self.assertTrue(_common.python_supported((4, 0)))
+        self.assertFalse(_common.python_supported((3, 11, 9)))
+        self.assertTrue(capabilities.report()["pythonSupported"])
+        stderr = io.StringIO()
+        with mock.patch.object(_common, "python_supported", return_value=False), \
+                contextlib.redirect_stderr(stderr), self.assertRaises(SystemExit) as stopped:
+            _common.run(lambda: self.fail("the tool must not start on an unsupported Python"))
+        self.assertEqual(stopped.exception.code, 2)
+        self.assertRegex(stderr.getvalue(), r"^error: these tools need Python 3\.12 or newer")
+
+
 class Capabilities(unittest.TestCase):
     def test_missing_profile_and_configured_profile(self):
         with tempfile.TemporaryDirectory() as tmp:

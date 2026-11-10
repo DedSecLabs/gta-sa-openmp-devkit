@@ -17,7 +17,7 @@ import os
 import platform
 import shutil
 
-from _common import EXE_NAMES, TOOL_VERSION, ci_path, load_profile, run
+from _common import EXE_NAMES, MIN_PYTHON, TOOL_VERSION, ci_path, load_profile, python_supported, run
 
 
 def _dir(profile_dir, value):
@@ -81,6 +81,8 @@ def report(start=None) -> dict:
     return {
         "tool": "capabilities.py " + TOOL_VERSION,
         "python": platform.python_version(),
+        "pythonSupported": python_supported(),
+        "pythonRequired": "%d.%d+" % MIN_PYTHON,
         "platform": sys.platform,
         "scope": "Local machine and accessible paths only; remote execution and permissions are not detected.",
         "profile": str(profile_path) if profile_path else None,

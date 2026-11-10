@@ -102,13 +102,14 @@ when its result is incomplete; the layer references show typical invocations.
 
 ## Report structure
 
-End research and implementation answers with these parts, shortest first:
+End research and implementation answers with these six parts, shortest first. The example is a fictional
+entrance, not game data; hashes are shortened here and must be written in full:
 
 ```
-Answer: <the conclusion in one or two sentences>
-Build: <label, confidence, executable SHA-256 if identified>
-Evidence: <per claim: layer, evidence class, source (file+hash+line / repo+commit+path / VA or RVA / probe)>
-Not examined: <what was skipped or unavailable, and partial tool coverage>
-Differences in the target runtime: <multiplayer, client or patch effects, if porting>
-Recorded in: <findings file and ids, or "not recorded" with the reason>
+Answer: SHOPX's entrance record leads to interior 6; the arrival point still needs an in-game check.
+Build: unidentified gta_sa.exe (sha256 9e1c…4a7d), confidence documented-only
+Evidence: data, original-observed: data/maps/shops/shops.ipl line 2, sha256 41ab…e09c
+Not examined: binary and streamed IPLs; nobody checked the arrival point in game
+Differences in the target runtime: no single-player script runs on open.mp; the server sets interior and position
+Recorded in: docs/research/findings.json#shopx-entrance (or "not recorded" with the reason)
 ```

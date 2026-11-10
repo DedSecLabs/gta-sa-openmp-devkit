@@ -10,6 +10,7 @@ import sys
 from pathlib import Path
 
 TOOL_VERSION = "0.1.0"
+MIN_PYTHON = (3, 12)
 EXE_NAMES = ("gta_sa.exe", "gta-sa.exe", "gta_sa_compact.exe")
 PROFILE_NAME = "gta-sa-openmp-devkit.json"
 
@@ -18,8 +19,17 @@ class DevkitError(Exception):
     """A refusal or invalid input that should be reported without a traceback."""
 
 
+def python_supported(version=None) -> bool:
+    """True when the interpreter meets MIN_PYTHON (the only versions these tools are tested on)."""
+    return tuple((version or sys.version_info)[:2]) >= MIN_PYTHON
+
+
 def run(main) -> None:
     """Run a script entry point; print refusals and file-system errors as one line and exit 2."""
+    if not python_supported():
+        print("error: these tools need Python %d.%d or newer; this is Python %s"
+              % (MIN_PYTHON + (sys.version.split()[0],)), file=sys.stderr)
+        sys.exit(2)
     try:
         code = main()
     except (DevkitError, OSError) as error:

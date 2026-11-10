@@ -26,3 +26,18 @@
 - Released as GTA SA open.mp DevKit (`gta-sa-openmp-devkit`) under MIT; personal executable fingerprints
   are omitted. A larger reviewed findings library is deferred. Five paired offline behavior cases are recorded
   separately from the tool tests, with their limitations.
+- Tools refuse to run on Python older than 3.12 with a one-line error, and `capabilities.py` reports
+  `pythonSupported`. `SKILL.md` shows a filled-in example answer instead of a bare template. The README is
+  rewritten for users: install, requirements, example requests, and current limitations.
+
+### Validation notes
+
+- Decompile comparison (Sanny Builder 4.2.0, `sa_sbl`): the outputs of the earlier wrapper and the corrected
+  one each contain 534,075 lines. The 548-byte difference is entirely accounted for by 274
+  `SeatId.FrontRight` -> `SeatId.BikeRear` substitutions (both value 0) and nine `WheelId.BikeRear` ->
+  `WheelId.RearLeft` substitutions (both value 1, equal-length names). Normalizing just these aliases makes
+  the outputs byte-identical. Values were checked in the installed `data/sa_sbl/enums.txt` (SHA-256
+  `9a8a1eea9ceff76e232d833de92b6f9e1d350336e145243a7058583bd0797b4e`). This shows equivalent text under those
+  definitions, not why Sanny chose different aliases, and is not an in-game behavior test.
+- An interrupted decompile (process killed) leaves Sanny Builder's settings patched until the wrapper's next
+  run, which restores them from its backup file.

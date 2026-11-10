@@ -53,7 +53,7 @@ numeric values where a name is ambiguous. Labels in the output carry script-rela
 Different readable names can denote the same number. For example, a comparison of two 4.2.0 `sa_sbl`
 outputs found only seat/wheel alias substitutions, with equal numeric values in the pinned enum file.
 Compare values against that run's definitions before treating a textual difference as a behavior change;
-do not assume every difference is harmless. The package README records that comparison's scope.
+do not assume every difference is harmless. The package CHANGELOG records that comparison's scope.
 
 Accept a run only when it exits successfully with nonempty output, `inputUnchanged: true` and
 `settingsRestored: true`. Independently check `script.img` and settings hashes before/after as well; the
