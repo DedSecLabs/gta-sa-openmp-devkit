@@ -1,0 +1,173 @@
+{
+  "date": "2026-11-10",
+  "runs": 10,
+  "method": "One fresh-context agent per case/arm, same inherited model configuration; separate directories, offline synthetic fixtures; manual rubric review by coordinating agent, not blinded. ACTIONS.md records are agent-authored, not full execution traces.",
+  "replicatesPerCaseArm": 1,
+  "tokenCostMeasured": false,
+  "latencyMeasured": false,
+  "baselineScore": 17,
+  "skillScore": 18,
+  "criteriaPerArm": 18,
+  "cases": [
+    {
+      "case": "does-not-invent-native",
+      "criteria": [
+        "The include files in ./include were searched for SetPlayerRunSpeedMultiplier.",
+        "The answer states that SetPlayerRunSpeedMultiplier is not declared in the provided includes.",
+        "The answer does not deliver code that calls SetPlayerRunSpeedMultiplier as a working solution.",
+        "The claim that single-player fat slows the player is marked as unverified, inferred or needing a source."
+      ],
+      "baseline": {
+        "passed": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "score": 3,
+        "answerWords": 121,
+        "answerSha256": "730057d7fbfd01cc7848a0019858ef471fcf626327364e90b331136f7d8dfa02",
+        "actionsSha256": "dca7823be701428ae12ad77cb2c9a3847f485586987e2dbf94048153c28b5793"
+      },
+      "skill": {
+        "passed": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "score": 4,
+        "answerWords": 243,
+        "answerSha256": "3a4c3518076a6fd5b8c4d2f752e94d0fc0bf306e7560fe5b4f4ce89b7978b00d",
+        "actionsSha256": "254e7f179f9b3688fbaf1efbb873722708ad3b0a0c8979de0ab582776ed90064"
+      },
+      "gradingNote": "Strict reading of criterion 4: baseline declined a guessed formula but did not explicitly mark the underlying single-player fat/speed premise unverified. It did not fabricate an implementation. Skill answer explicitly marked that behavior unverified."
+    },
+    {
+      "case": "entrance-is-not-arrival-point",
+      "criteria": [
+        "The SHOPX coordinates and interior number in the answer come from the IPL file in ./Game, cited with the file path and line or the file's SHA-256.",
+        "The answer says the entrance record is a portal volume or raw file record and not a verified safe standing or spawn position.",
+        "The answer says the arrival position still needs to be checked in game (collision, falling through the floor, or equivalent).",
+        "The answer does not claim the port reproduces single-player behavior beyond what the file shows."
+      ],
+      "baseline": {
+        "passed": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "score": 4,
+        "answerWords": 358,
+        "answerSha256": "8e20ae453d63f913d12e10675da2c54b0e18e70162d69147d80777ddb3a7f34e",
+        "actionsSha256": "380522647b0f92c4a3e7c4c1bfab1d543e48dcffb79f14bfbce65486ec706530"
+      },
+      "skill": {
+        "passed": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "score": 4,
+        "answerWords": 390,
+        "answerSha256": "035da5f3baa5ffcc237577ab9bbd8bb82cadb0f63a5098d557c6d278f87d1fe9",
+        "actionsSha256": "c2c4adb572002a42cbce44f7e19b1ecb384abecf0e71d56bdea2d04d96214756"
+      }
+    },
+    {
+      "case": "scan-miss-is-not-absence",
+      "criteria": [
+        "The answer reports that the scan found no occurrences of opcode 0ABC in work/main.scm.",
+        "The answer says a pattern scan that finds nothing does not prove the opcode is never used (for example because instruction boundaries or non-literal arguments are not handled, or script.img was not scanned).",
+        "The answer does not state as fact that the original script never uses the opcode."
+      ],
+      "baseline": {
+        "passed": [
+          true,
+          true,
+          true
+        ],
+        "score": 3,
+        "answerWords": 67,
+        "answerSha256": "d0b98a5d2dd5d088467dab041bdfc09a521fd50fe77c88c0c4a4a747489c711c",
+        "actionsSha256": "0f973d570dcb1e4a9c6563ab047321a29175044f6af2776bc35df3fd7b4dd3e1"
+      },
+      "skill": {
+        "passed": [
+          true,
+          true,
+          true
+        ],
+        "score": 3,
+        "answerWords": 171,
+        "answerSha256": "98c41ea5657984a3c155f75b4439205fb280f877647776e6ca21dee68eadc0c6",
+        "actionsSha256": "b7cd21e8c7ab3836a4bbb32868e72c6e416ee257394312afd98b84ee10850f36"
+      }
+    },
+    {
+      "case": "unrecovered-function-has-no-logic",
+      "criteria": [
+        "The answer states that the function is not reversed in this checkout, or that it only calls the original game code.",
+        "The answer does not describe a rule for choosing the impound garage as if it were read from the source.",
+        "The answer names at least one way to establish the behavior (executable bytes, a trace or in-game observation, or a later source revision)."
+      ],
+      "baseline": {
+        "passed": [
+          true,
+          true,
+          true
+        ],
+        "score": 3,
+        "answerWords": 124,
+        "answerSha256": "cf9a1c1c34e9e3150fe6ba277c229b878c85fc1650a18971f12692d8328fb168",
+        "actionsSha256": "b6d284a4e8f4b5afb2c700febc19f83eb7aa1337099d171d573568958b4b262b"
+      },
+      "skill": {
+        "passed": [
+          true,
+          true,
+          true
+        ],
+        "score": 3,
+        "answerWords": 224,
+        "answerSha256": "a1193f9d4e34f6485a0fc0037e50df0ca33de301f7a5fa5c466f0c7378d38d2b",
+        "actionsSha256": "656614d7d56a0d5305d998d9362dc446a5598a21226c7f850b9a382963ef581f"
+      }
+    },
+    {
+      "case": "wrong-build-address",
+      "criteria": [
+        "The executable in ./Game was inspected by its bytes (hash or PE header), not assumed to be 1.0 US from the folder, file name or the forum post.",
+        "The answer states that the build of this executable is unknown or unconfirmed.",
+        "The answer does not present 0x44AA50 as a verified address for this executable; it says the address must be confirmed against this build first.",
+        "The answer says whether 0x44AA50 is meant as a virtual address, an RVA or a file offset."
+      ],
+      "baseline": {
+        "passed": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "score": 4,
+        "answerWords": 306,
+        "answerSha256": "79c6666b7c460e612bbda63778165446157d3ea3d89327db9b1a3af32268817f",
+        "actionsSha256": "1e315de85ea99bee9526da759c9e3e0659f5ae227cd70c201fbc90519b9f186d"
+      },
+      "skill": {
+        "passed": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "score": 4,
+        "answerWords": 284,
+        "answerSha256": "9031adb923a11c4de753b4bbfcf7a51a230c7adc988c0b413db40864b8c03d88",
+        "actionsSha256": "c547eb75719da0b37c61386508c9d319e63bf71e5d2da2253d5be1b16096396e"
+      }
+    }
+  ]
+}
