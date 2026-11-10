@@ -24,6 +24,39 @@ class Base(unittest.TestCase):
 
 
 class WriteProtection(Base):
+    def test_preexisting_temporary_hardlink_cannot_overwrite_game_files(self):
+        victim = self.game / "data" / "handling.cfg"
+        before = victim.read_bytes()
+        output = self.base / "manifest.json"
+        collision = output.with_name(output.name + ".tmp")
+        os.link(victim, collision)
+        write_json(output, {"safe": True})
+        self.assertEqual(victim.read_bytes(), before)
+        self.assertEqual(collision.read_bytes(), before)
+        self.assertEqual(json.loads(output.read_text()), {"safe": True})
+
+    def test_preexisting_temporary_symlink_cannot_overwrite_game_files(self):
+        victim = self.game / "data" / "handling.cfg"
+        before = victim.read_bytes()
+        output = self.base / "manifest.json"
+        collision = output.with_name(output.name + ".tmp")
+        try:
+            collision.symlink_to(victim)
+        except (OSError, NotImplementedError):
+            self.skipTest("this account cannot create file links")
+        write_json(output, {"safe": True})
+        self.assertEqual(victim.read_bytes(), before)
+        self.assertTrue(collision.is_symlink())
+
+    def test_failed_json_write_preserves_previous_output_and_cleans_temporary_file(self):
+        output = self.base / "manifest.json"
+        output.write_text('{"previous": true}\n')
+        before = set(self.base.iterdir())
+        with self.assertRaises(TypeError):
+            write_json(output, {"invalid": object()})
+        self.assertEqual(json.loads(output.read_text()), {"previous": True})
+        self.assertEqual(set(self.base.iterdir()), before)
+
     def test_outputs_inside_an_installation_are_refused(self):
         for target in (self.game / "out.json", self.game / "data" / "new" / "out.json"):
             with self.assertRaisesRegex(DevkitError, "outside a game installation"):
@@ -116,6 +149,26 @@ class Manifest(Base):
 
 
 class IplRecords(Base):
+    def test_fractional_interior_or_flags_are_malformed_not_truncated(self):
+        for field, value in ((11, "3.75"), (12, "4.5"), (11, "3.00000000000000000000000000001")):
+            with self.subTest(field=field):
+                parts = helpers.ENEX_OK.split(",")
+                parts[field] = value
+                helpers.write_ipl(self.game, "fractional.ipl", "enex\n%s\nend\n" % ",".join(parts))
+                result = export_ipl_records.export_records(self.game, "enex")
+                self.assertFalse(result["complete"])
+                self.assertEqual(result["records"], [])
+                self.assertEqual(len(result["problems"]), 1)
+                self.assertIn("integer", result["problems"][0]["message"])
+
+    def test_integral_decimal_fields_remain_exact(self):
+        parts = helpers.ENEX_OK.split(",")
+        parts[11], parts[12] = "3.0", "4e0"
+        helpers.write_ipl(self.game, "integral.ipl", "enex\n%s\nend\n" % ",".join(parts))
+        result = export_ipl_records.export_records(self.game, "enex")
+        self.assertTrue(result["complete"])
+        self.assertEqual((result["records"][0]["areaCode"], result["records"][0]["flags"]), (3, 4))
+
     def test_enex_and_grge_rows_with_provenance(self):
         path = helpers.write_ipl(self.game, "a.ipl", "inst\nend\nenex\n# note\n%s\nend\ngrge\n%s\nend\n"
                                  % (helpers.ENEX_OK, helpers.GRGE_OK))

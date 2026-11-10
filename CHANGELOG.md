@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.1
+
+- Create JSON output through an exclusively created temporary file, preventing pre-existing temporary
+  symlinks or hard links from overwriting game files. Failed writes preserve the previous output and
+  remove their temporary file.
+- Reject fractional ENEX interior IDs and flags instead of silently truncating them into apparent facts.
+  Integral decimal representations remain supported; malformed rows make the export incomplete.
+- Align the tool version, skill metadata and changelog; CI checks their agreement. Document stable tagged
+  installation and update commands. Version tags identify tested revisions; GitHub Release pages are optional.
+
 ## 0.1.0
 
 - Portable research method extracted into one skill with per-layer references and a project profile.

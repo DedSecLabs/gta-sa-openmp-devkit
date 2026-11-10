@@ -2,6 +2,8 @@
 name: gta-sa-openmp-devkit
 description: Evidence-based research and development for classic GTA San Andreas modding and open.mp/SA-MP servers. Use whenever work depends on how the original game really behaves or what its data really contains - SCM mission scripts, engine code, memory addresses and executable versions, IPL/IDE/DAT data, entrances and interiors, garages, shops, vehicles, peds, HUD or radar - and whenever porting that behavior to open.mp/Pawn or a client ASI/CLEO mod. Use it before asserting "single player does X", before reusing an address or offset from gta-reversed, Plugin-SDK or a forum post, before calling a Pawn native you have not seen declared, and when recording or reviewing research findings, even if the user never says "research". Not for the Definitive Edition, other GTA titles or asset editing.
 license: MIT
+metadata:
+  version: "0.1.1"
 compatibility: Bundled scripts need Python 3.12+ (standard library only; validated on 3.12). Optional Sanny Builder decompilation is validated on Windows with version 4.2.0, sa_sbl mode.
 ---
 

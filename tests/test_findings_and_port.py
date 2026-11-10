@@ -1,5 +1,6 @@
 import copy
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -300,6 +301,19 @@ class Capabilities(unittest.TestCase):
 
 
 class Package(unittest.TestCase):
+    def test_version_labels_agree(self):
+        import re
+        from _common import TOOL_VERSION
+        front = (helpers.SKILL / "SKILL.md").read_text().split("---", 2)[1]
+        version = re.search(r'^  version: "([0-9]+\.[0-9]+\.[0-9]+)"$', front, re.M)
+        self.assertIsNotNone(version)
+        self.assertEqual(version.group(1), TOOL_VERSION)
+        changelog = (helpers.ROOT / "CHANGELOG.md").read_text()
+        self.assertEqual(re.search(r"^## ([0-9]+\.[0-9]+\.[0-9]+)$", changelog, re.M).group(1), TOOL_VERSION)
+        tag_ref = os.environ.get("GITHUB_REF", "")
+        if tag_ref.startswith("refs/tags/"):
+            self.assertEqual(tag_ref, "refs/tags/v" + TOOL_VERSION)
+
     def test_skill_is_lean_portable_and_self_consistent(self):
         import re
         skill = (helpers.SKILL / "SKILL.md").read_text(encoding="utf-8")

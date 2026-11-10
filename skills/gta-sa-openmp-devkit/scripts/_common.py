@@ -7,9 +7,10 @@ import json
 import os
 import struct
 import sys
+import tempfile
 from pathlib import Path
 
-TOOL_VERSION = "0.1.0"
+TOOL_VERSION = "0.1.1"
 MIN_PYTHON = (3, 12)
 EXE_NAMES = ("gta_sa.exe", "gta-sa.exe", "gta_sa_compact.exe")
 PROFILE_NAME = "gta-sa-openmp-devkit.json"
@@ -145,11 +146,20 @@ def write_json(path, document, forbid=()) -> Path:
     if full.is_dir():
         raise DevkitError("output path is a directory: %s" % full)
     full.parent.mkdir(parents=True, exist_ok=True)
-    temporary = full.with_name(full.name + ".tmp")
-    with open(temporary, "w", encoding="utf-8", newline="\n") as handle:
-        json.dump(document, handle, indent=1, ensure_ascii=False)
-        handle.write("\n")
-    os.replace(temporary, full)
+    temporary = None
+    try:
+        # Exclusive creation avoids following an existing link or colliding with another writer.
+        # Keep the temporary on the destination filesystem for atomic replacement on Windows too.
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", newline="\n",
+                                         dir=full.parent, prefix="." + full.name + ".", suffix=".tmp",
+                                         delete=False) as handle:
+            temporary = Path(handle.name)
+            json.dump(document, handle, indent=1, ensure_ascii=False)
+            handle.write("\n")
+        os.replace(temporary, full)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
     return full
 
 

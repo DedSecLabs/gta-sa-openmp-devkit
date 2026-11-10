@@ -18,6 +18,30 @@ Works with agents that support [Agent Skills](https://github.com/agentskills/age
 Code and Codex. Or copy the `skills/gta-sa-openmp-devkit/` folder into your project's `.claude/skills/` or
 `.agents/skills/` folder.
 
+## Versions and updates
+
+For a tested checkpoint rather than the current default branch, install a version tag:
+
+```bash
+npx skills add DedSecLabs/gta-sa-openmp-devkit@v0.1.1 --skill gta-sa-openmp-devkit
+```
+
+For an unpinned installation, check for updates and update this skill with:
+
+```bash
+npx skills check
+npx skills update gta-sa-openmp-devkit
+```
+
+To change a pinned installation, explicitly install the desired tag with `skills add` again. Keep your
+project profile and findings outside the installed skill folder so replacing it preserves your research.
+
+Versions identify the skill instructions and bundled tools together: patches (`0.1.x`) fix behavior without
+changing interfaces, while minor versions add capabilities or document migrations for breaking changes
+during `0.x`. Published tags stay attached to their original commits. The tools' version in
+`scripts/_common.py` is authoritative; CI checks the skill metadata and latest changelog entry against it.
+GitHub Release pages and separate download bundles are not required.
+
 ## What you need
 
 - An AI coding agent with skill support.

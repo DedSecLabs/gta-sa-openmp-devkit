@@ -15,6 +15,7 @@ sys.dont_write_bytecode = True  # keep the installed skill folder unchanged
 import argparse
 import math
 import os
+from decimal import Decimal, InvalidOperation
 
 from _common import (DevkitError, TOOL_VERSION, ci_path, game_root, rel_posix, run, sha256_bytes, utc_now,
                      write_json)
@@ -34,12 +35,23 @@ def _numbers(parts):
     return values
 
 
+def _integer(text):
+    try:
+        value = Decimal(text.strip())
+    except InvalidOperation:
+        raise ValueError("expected an integer: %r" % text)
+    if not value.is_finite() or value != value.to_integral_value():
+        raise ValueError("expected an integer: %r" % text)
+    return int(value)
+
+
 def parse_enex(parts):
     if len(parts) < 18:
         raise ValueError("expected at least 18 fields, found %d" % len(parts))
     n = _numbers(parts[:13])
     return {"name": parts[13].strip('"'), "entry": n[0:3], "entryAngle": n[3], "volume": n[4:7],
-            "destination": n[7:10], "destinationAngle": n[10], "areaCode": int(n[11]), "flags": int(n[12]),
+            "destination": n[7:10], "destinationAngle": n[10],
+            "areaCode": _integer(parts[11]), "flags": _integer(parts[12]),
             "sky": _int_or_raw(parts[14]), "i2": _int_or_raw(parts[15]), "timeOn": _int_or_raw(parts[16]),
             "timeOff": _int_or_raw(parts[17])}
 
