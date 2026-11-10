@@ -1,0 +1,9 @@
+{
+ "schemaVersion": 1,
+ "notes": [
+  "No executable fingerprints ship with this release. Keep user-supplied build records in a private project file and pass --known-builds PATH.",
+  "A hash match identifies the recorded file; it does not independently authenticate its version or original status.",
+  "Record where each label came from and use documented-only unless stronger evidence supports it."
+ ],
+ "builds": []
+}

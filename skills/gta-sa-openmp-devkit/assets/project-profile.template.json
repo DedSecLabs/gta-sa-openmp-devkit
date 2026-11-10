@@ -1,0 +1,34 @@
+{
+ "_about": "Copy to your project root as gta-sa-openmp-devkit.json and delete what does not apply. Paths may be absolute or relative to this file. Keep machine-specific paths out of public repositories if you prefer; nothing here is a secret, but nothing here should be game content either.",
+ "schemaVersion": 1,
+ "findings": {
+  "file": "docs/research/findings.json",
+  "searchPaths": ["docs", "src"],
+  "recordNarrativeIn": "docs/research/",
+  "decisionsIn": "docs/decisions.md"
+ },
+ "game": {
+  "installDir": "",
+  "label": "",
+  "build": {"label": "", "confidence": "documented-only", "exeSha256": ""}
+ },
+ "references": {
+  "gtaReversed": {"path": "", "url": "https://github.com/gta-reversed/gta-reversed", "commit": ""},
+  "pluginSdk": {"path": "", "url": "https://github.com/DK22Pac/plugin-sdk", "commit": ""}
+ },
+ "tools": {
+  "sannyDir": "",
+  "privateWorkspace": ""
+ },
+ "target": {
+  "runtime": "open.mp",
+  "version": "",
+  "includeDirs": [],
+  "clientPatches": []
+ },
+ "policies": {
+  "cachedEvidence": "forbidden",
+  "installTools": "ask",
+  "startGame": "ask"
+ }
+}

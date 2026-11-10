@@ -1,0 +1,50 @@
+{
+ "schemaVersion": 1,
+ "_comment": "Format illustration only. Every hash, address and value below is a made-up placeholder, not a fact about the game.",
+ "findings": [
+  {
+   "id": "example-data-entrance-row",
+   "claim": "EXAMPLE: the entrance record named PLACEHOLDER has interior number 0 in the text IPL.",
+   "layer": "data",
+   "evidenceClass": "original-observed",
+   "build": {"label": "EXAMPLE build label", "confidence": "corroborated",
+             "exeSha256": "0000000000000000000000000000000000000000000000000000000000000001"},
+   "sources": [
+    {"type": "file", "path": "data/maps/example/example.ipl", "line": 12,
+     "sha256": "0000000000000000000000000000000000000000000000000000000000000002"}
+   ],
+   "multiplayerNotes": "The record is a portal volume; a multiplayer arrival point needs its own checked position.",
+   "implementation": {"status": "none"},
+   "recorded": "2026-01-01"
+  },
+  {
+   "id": "example-engine-routine",
+   "claim": "EXAMPLE: the routine at the cited address is reached from the placeholder caller.",
+   "layer": "engine",
+   "evidenceClass": "exe-byte",
+   "build": {"label": "EXAMPLE build label", "confidence": "corroborated",
+             "exeSha256": "0000000000000000000000000000000000000000000000000000000000000001"},
+   "sources": [
+    {"type": "executable", "sha256": "0000000000000000000000000000000000000000000000000000000000000001",
+     "addressKind": "va", "address": "0x401000", "length": 16, "tool": "objdump -D -b binary -mi386"},
+    {"type": "repository", "url": "https://example.invalid/reversed-source", "commit": "0123456789abcdef0123456789abcdef01234567",
+     "path": "source/Example.cpp", "line": 40}
+   ],
+   "notExamined": "Only the first 16 bytes were decoded; the rest of the routine and its callers were not read.",
+   "implementation": {"status": "none"},
+   "recorded": "2026-01-01"
+  },
+  {
+   "id": "example-inferred-behavior",
+   "claim": "EXAMPLE: the shop probably closes at night because similar shops do.",
+   "layer": "scm",
+   "evidenceClass": "inferred",
+   "build": {"label": "EXAMPLE build label", "confidence": "documented-only"},
+   "sources": [],
+   "notExamined": "No script was decompiled and nobody observed it in game.",
+   "conflictsWith": ["example-data-entrance-row"],
+   "implementation": {"status": "none"},
+   "recorded": "2026-01-01"
+  }
+ ]
+}
