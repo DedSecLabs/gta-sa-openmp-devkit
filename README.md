@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/social-preview.jpg" width="800" alt="GTA SA open.mp DevKit. Stop guessing, start verifying. Evidence-based AI skill for GTA San Andreas and open.mp/SA-MP development. Install with npx skills add DedSecLabs/gta-sa-openmp-devkit.">
+</p>
+
 # GTA SA open.mp DevKit
 
 **An AI agent skill for GTA San Andreas modding and open.mp/SA-MP server development.**
