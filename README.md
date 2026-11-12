@@ -137,8 +137,9 @@ behavior test cases; neither is installed for users. All test fixtures are gener
 files to the repository. Changes are listed in the [changelog](CHANGELOG.md).
 
 To release: bump the version in `scripts/_common.py`, `SKILL.md` and `CHANGELOG.md`, merge to `main`, then push
-a `vX.Y.Z` tag. The release workflow runs the full test matrix and the version checks, then publishes the
-release from the changelog section. A failed check publishes nothing.
+a `vX.Y.Z` tag. The release workflow runs the tests and version checks, requires the full CI matrix to have
+passed on that commit on `main` (waiting for it if needed), then publishes the release from the changelog
+section. A failed check publishes nothing.
 
 ## License
 
