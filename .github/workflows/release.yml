@@ -1,0 +1,52 @@
+name: release
+
+# Publishes a GitHub Release when a semantic version tag (vX.Y.Z) is pushed.
+# It never creates or moves tags: the maintainer pushes the tag after bumping the
+# version in scripts/_common.py, SKILL.md and CHANGELOG.md. Re-running is safe.
+on:
+  push:
+    tags: ['v[0-9]+.[0-9]+.[0-9]+']
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    # Same matrix as ci.yml. The tag ref is visible to the tests, which check that
+    # the tag equals the tool version, SKILL.md metadata and the latest changelog entry.
+    uses: ./.github/workflows/ci.yml
+
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Check the tag
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "::error::$TAG is not vX.Y.Z"; exit 1; }
+          git merge-base --is-ancestor "$GITHUB_SHA" origin/main \
+            || { echo "::error::$TAG is not on main"; exit 1; }
+      - name: Extract release notes
+        env:
+          TAG: ${{ github.ref_name }}
+        run: python3 .github/scripts/release_notes.py "$TAG" > "$RUNNER_TEMP/notes.md"
+      - name: Publish or refresh the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release edit "$TAG" --title "$TAG" --notes-file "$RUNNER_TEMP/notes.md"
+          else
+            gh release create "$TAG" --verify-tag --title "$TAG" --notes-file "$RUNNER_TEMP/notes.md"
+          fi

@@ -40,7 +40,8 @@ Versions identify the skill instructions and bundled tools together: patches (`0
 changing interfaces, while minor versions add capabilities or document migrations for breaking changes
 during `0.x`. Published tags stay attached to their original commits. The tools' version in
 `scripts/_common.py` is authoritative; CI checks the skill metadata and latest changelog entry against it.
-GitHub Release pages and separate download bundles are not required.
+Each version tag also has a [GitHub Release](https://github.com/DedSecLabs/gta-sa-openmp-devkit/releases) with
+its changelog notes; there are no separate download bundles. Install from the tag as shown above.
 
 ## What you need
 
@@ -134,6 +135,10 @@ python -m unittest discover -s tests -v
 The skill itself is `skills/gta-sa-openmp-devkit/`. `tests/` covers the tools, and `evals/` holds the
 behavior test cases; neither is installed for users. All test fixtures are generated, so never add game
 files to the repository. Changes are listed in the [changelog](CHANGELOG.md).
+
+To release: bump the version in `scripts/_common.py`, `SKILL.md` and `CHANGELOG.md`, merge to `main`, then push
+a `vX.Y.Z` tag. The release workflow runs the full test matrix and the version checks, then publishes the
+release from the changelog section. A failed check publishes nothing.
 
 ## License
 
