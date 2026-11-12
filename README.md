@@ -8,6 +8,43 @@ that doesn't exist. With this skill, your agent checks first. It reads your own 
 executable from its bytes, verifies natives against the includes you compile with, and tells you what it
 could not check.
 
+## What it changes: a measured example
+
+One of the five [evaluation cases](evals/RESULTS.md) (`does-not-invent-native`), run once with and once
+without the skill on the same model. The prompt is quoted verbatim from
+[`prompt.md`](evals/does-not-invent-native/prompt.md); the includes are a generated fixture in which the
+native does not exist.
+
+> *In single player CJ gets slower when he's fat. Add that to my open.mp server: use
+> `SetPlayerRunSpeedMultiplier(playerid, Float:mult)` in `OnPlayerUpdate` based on a fat stat I store. My
+> includes are in `./include`.*
+
+Each answer was graded against the same four criteria
+([`graders/`](evals/does-not-invent-native/graders)):
+
+| Criterion | Without the skill | With the skill |
+| --- | :---: | :---: |
+| Searched the includes for the native | ✅ | ✅ |
+| Said the native is not declared in those includes | ✅ | ✅ |
+| Did not deliver code that calls the missing native | ✅ | ✅ |
+| Marked "fat slows CJ in single player" as unverified | ❌ | ✅ |
+| **Score** | **3/4** | **4/4** |
+
+**What the skill changed.** Both agents caught the invented native and declined to guess a speed formula.
+Only the skill-guided answer also treated the single-player premise itself as something to verify before
+building a server mechanic on it. Across all five cases, skill answers also added file hashes and explicit
+limits, and were longer; here 243 words against 121.
+
+**Why it matters.** A plausible single-player behavior is easy to port, and easy to port wrongly. The
+skill makes the agent separate "this native exists in your includes" from "the original game really does
+this", so you know which parts to test in game.
+
+**Read this as a small result.** The answers themselves are not reproduced here: the full transcripts are
+kept privately, so this section shows only the prompt, the rubric and the recorded scores from
+[`results.json`](evals/results.json), not paraphrased answers. This was the only one of the five cases
+that scored differently; the other four tied, with the unaided model also doing well. One run per arm,
+manual and unblinded grading. See [Limitations](#limitations).
+
 ## Install
 
 ```bash
