@@ -1,0 +1,45 @@
+name: Bug report
+description: A bundled tool or the skill's instructions behave incorrectly.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. **Do not attach game files, decompiled scripts or secrets.** Paste short
+        excerpts or hashes instead. Wrong *agent answers* with no tool failure are better filed as an
+        [evaluation case](https://github.com/DedSecLabs/gta-sa-openmp-devkit/issues/new?template=evaluation_case.yml).
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps or command to reproduce
+      description: The exact command (for example `check_native.py ...`) or the request you gave your agent.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output or error message
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: Skill version
+      description: Run `capabilities.py`; its `tool` field shows the version. Or give the tag you installed.
+      placeholder: "0.1.1"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, and which agent you use (Claude Code, Codex, ...).
+      placeholder: "Windows 11, Python 3.12, Claude Code"
+    validations:
+      required: true

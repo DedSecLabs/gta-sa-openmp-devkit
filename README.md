@@ -167,7 +167,14 @@ installation and produce hashes and facts. Keep decompiled scripts and game file
 Not affiliated with or endorsed by Rockstar Games, Take-Two Interactive, or the open.mp, SA-MP,
 gta-reversed, Plugin-SDK or Sanny Builder projects.
 
-## Contributing
+## Feedback and contributing
+
+Found a bug, want something added, or have a case where an agent got GTA SA or open.mp work wrong? Open an
+issue: [bug report](https://github.com/DedSecLabs/gta-sa-openmp-devkit/issues/new?template=bug_report.yml),
+[feature request](https://github.com/DedSecLabs/gta-sa-openmp-devkit/issues/new?template=feature_request.yml) or
+[evaluation case](https://github.com/DedSecLabs/gta-sa-openmp-devkit/issues/new?template=evaluation_case.yml).
+Please don't attach game files or decompiled scripts. [CONTRIBUTING.md](CONTRIBUTING.md) covers pull requests
+and how to write an evaluation case.
 
 ```bash
 python -m unittest discover -s tests -v

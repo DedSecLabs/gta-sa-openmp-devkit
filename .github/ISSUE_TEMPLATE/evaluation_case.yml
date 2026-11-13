@@ -1,0 +1,56 @@
+name: Evaluation case proposal
+description: Share a real example of an AI agent getting GTA SA or open.mp work wrong.
+labels: [evaluation case]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Evaluation cases are small, reproducible prompts where an unaided agent tends to be confidently wrong,
+        graded by a short rubric. See [CONTRIBUTING.md](https://github.com/DedSecLabs/gta-sa-openmp-devkit/blob/main/CONTRIBUTING.md#evaluation-cases).
+        **Do not paste game files, decompiled scripts or long copyrighted text.** Describe or shorten; fixtures
+        in this repository are always generated.
+  - type: textarea
+    id: prompt
+    attributes:
+      label: The prompt you gave the agent
+      description: As close to verbatim as you can.
+    validations:
+      required: true
+  - type: textarea
+    id: wrong-answer
+    attributes:
+      label: What the agent did wrong
+      description: Quote or summarize the incorrect claim, address, native or code. Mark any shortening.
+    validations:
+      required: true
+  - type: textarea
+    id: correct
+    attributes:
+      label: What a correct answer says, and how it can be verified
+      description: Cite the source (include file, public reference, documented behavior), not "I know".
+    validations:
+      required: true
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and model, and whether the skill was installed
+      placeholder: "Codex, model X, without the skill"
+    validations:
+      required: true
+  - type: dropdown
+    id: reproducible
+    attributes:
+      label: Can this be reproduced with generated files only?
+      description: Cases must not need real game files.
+      options:
+        - "Yes, a small synthetic fixture is enough"
+        - "Not sure"
+        - "No, it needs real game data"
+    validations:
+      required: true
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contribution
+      options:
+        - label: I would be willing to open a pull request adding this case.
