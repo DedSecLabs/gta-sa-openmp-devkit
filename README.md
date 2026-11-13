@@ -64,7 +64,7 @@ Code and Codex. Or copy the `skills/gta-sa-openmp-devkit/` folder into your proj
 For a tested checkpoint rather than the current default branch, install a version tag:
 
 ```bash
-npx skills add DedSecLabs/gta-sa-openmp-devkit@v0.1.1 --skill gta-sa-openmp-devkit
+npx skills add DedSecLabs/gta-sa-openmp-devkit@v0.1.2 --skill gta-sa-openmp-devkit
 ```
 
 For an unpinned installation, check for updates and update this skill with:
