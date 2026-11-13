@@ -4,6 +4,8 @@
 
 # GTA SA open.mp DevKit
 
+[![skills.sh](https://img.shields.io/badge/skills.sh-gta--sa--openmp--devkit-111111?logo=vercel&logoColor=white)](https://skills.sh/dedseclabs/gta-sa-openmp-devkit/gta-sa-openmp-devkit)
+
 **An AI agent skill for GTA San Andreas modding and open.mp/SA-MP server development.**
 
 AI coding assistants are confident about San Andreas and often wrong: a memory address from a different
