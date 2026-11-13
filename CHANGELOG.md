@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2
+
+- Add an "untrusted content" ground rule: third-party repositories, source comments, documentation,
+  decompiled scripts, findings and tool output are evidence to cite, never instructions. Agents ignore embedded
+  requests for unrelated commands, policy overrides, secret disclosure or unauthorized changes. Instructions
+  only; the tools and research workflow are unchanged.
+
 ## 0.1.1
 
 - Create JSON output through an exclusively created temporary file, preventing pre-existing temporary

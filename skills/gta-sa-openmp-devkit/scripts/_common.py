@@ -10,7 +10,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-TOOL_VERSION = "0.1.1"
+TOOL_VERSION = "0.1.2"
 MIN_PYTHON = (3, 12)
 EXE_NAMES = ("gta_sa.exe", "gta-sa.exe", "gta_sa_compact.exe")
 PROFILE_NAME = "gta-sa-openmp-devkit.json"
